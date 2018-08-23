@@ -7,7 +7,6 @@
 
 The goals / steps of this project are the following:
 * Make a pipeline that finds lane lines on the road
-* Reflect on your work in a written report
 
 
 [//]: # (Image References)
@@ -19,6 +18,7 @@ The goals / steps of this project are the following:
 [image_hough]: ./test_images_output/houghout_whiteCarLaneSwitch.jpg "Hough transform"
 [image_polyfitline]: ./test_images_output/polyfitout_whiteCarLaneSwitch.jpg "Poly fit line"
 [image_processed]: ./test_images_output/whiteCarLaneSwitch.jpg "Processed Image"
+[image_processed_with_polyfit]: ./test_images_output/polyfitline_whiteCarLaneSwitch.jpg "Processed Image with polyfit"
 
 ---
 
@@ -38,28 +38,25 @@ My pipeline consisted of 5 steps:
  - I applied hough transform to connect the points result from canny detection into lines.
  ![alt text][image_hough]
  - I separated the lines resulting from hough transform into two segments. The first segment is the left lines segment, and the second one is the right lines segment. The segments are separated by the mid x point of the region of interest.
- ![alt text][image_gray]
  - I poly fit the lines result from hough transform to draw a full line of the two lanes.
  ![alt text][image_polyfitline]
  - I applied the drawn two lines on the original image.
  ![alt text][image_processed]
-
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
-
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
+ and when drawing the full two lines using poly fitting its output is:
+ ![alt text][image_processed_with_polyfit]
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
 
-One potential shortcoming would be what would happen when ... 
+One potential shortcoming would be what would happen when the left of the right of the lane line has an obvious edge and it is within the region of interest so it will be mis treated as a lane line.
 
-Another shortcoming could be ...
+Another shortcoming could be in the gray areas where the lane color is not obvious so it may fail finding the lane line because the contrast difference is not so high.
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+ - A possible improvement would be to find another color space that represents the lane lines better than RGB.
+ - We can also make the region of interest more tigh.
+ - We can generalize the idea to find not only straight lines, but also curves, as the lane lines are curves in the real world.
 
-Another potential improvement could be to ...
